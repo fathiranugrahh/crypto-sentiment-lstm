@@ -1,0 +1,30 @@
+=== STATUS PROYEK: ANALISIS SENTIMEN & PREDIKSI KRIPTO (LSTM) ===
+Tanggal: 2026-03-23
+Status Terakhir: Preprocessing Selesai, Menuju Rebuild Matriks 3D.
+
+--- PROGRESS YANG SUDAH SELESAI ---
+1. Dataset Gabungan: Tweet dari Elon, Saylor, Trump sudah disatukan (2054 baris).
+2. Macro Filtering: Data H-1, H, H+1 FOMC & CPI sudah dibuang (Sisa 1680 tweet).
+3. Agregasi 24H: Tweet dalam jendela 24 jam dilebur menjadi 622 peristiwa (MASTER_DATASET_AGGREGATED.csv).
+4. Sentiment Scoring: Menggunakan FinBERT v3 (Rich Lexicon + Scoring System) -> MASTER_DATASET_SCORED.csv.
+5. Feature Engineering: Multi-label Narrative Tagging (Regex Boundaries) & Time-Series Alignment (merge_asof).
+6. Asset Mapping (Additive): Mapping narasi ke 10 koin (BTC, ETH, SOL, BNB, ADA, XRP, DOGE, TRX, LINK, AVAX).
+7. Final Dataset: FINAL_ML_DATASET.csv (408,580 baris) berisi OHLCV, Price_Runup_24H, Social Features, dan Tren_Harga_24H.
+8. Baseline: Logistic Regression selesai (Akurasi 52.39%, Recall 62.47%).
+
+--- MASALAH TERAKHIR ---
+- File .npy sebelumnya corrupt karena MemoryError (RAM Laptop Penuh).
+- Butuh rebuild matriks 3D [Samples, 24, Features] menggunakan teknik yang hemat RAM.
+
+--- LANGKAH SELANJUTNYA SETELAH RESTART ---
+1. Jalankan script 'brutal_rebuild_3d.py' (yang akan dibuat) untuk menghasilkan file:
+   - X_train_3D.npy
+   - X_test_3D.npy
+   - y_train_3D.npy
+   - y_test_3D.npy
+2. Upload file tersebut ke Google Colab.
+3. Jalankan notebook 'training_lstm.ipynb' di Colab menggunakan GPU T4.
+
+--- CATATAN TEKNIS ---
+- Gunakan tipe data float32 untuk menghemat RAM.
+- Skala data (StandardScaler) harus fit pada data Train (< 2025) baru transform ke seluruh dataset.
