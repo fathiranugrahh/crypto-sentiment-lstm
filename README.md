@@ -83,3 +83,8 @@ MIT — free to use and modify.
 ---
 
 Built by [Fathir Anugrah](https://github.com/fathiranugrahh) · [fathiranugrah.com](https://fathiranugrah.com)
+
+## License
+
+This project is licensed under the MIT License.
+
